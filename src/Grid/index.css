@@ -1,0 +1,29 @@
+/* I only use table because it's semantic */
+table, tbody, tfoot, thead, tr, th, td {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+  vertical-align: baseline;
+  border-collapse: collapse;
+}
+
+.main-grid thead th {
+  vertical-align: bottom;
+}
+
+.main-grid tbody th {
+  text-align: right;
+}
+
+.main-grid th div {
+  width: 16px;
+  height: 16px;
+  border: 1px solid black;
+  line-height: 16px;
+}
+
+.main-grid tbody th div {
+  display: inline-block;
+}
