@@ -15,7 +15,7 @@ export default class Grid extends React.Component {
 
   render() {
     return (
-      <table className="main-grid">
+      <table className="main-grid" cellspacing="0">
         <thead>
           <tr>
             <th></th>
@@ -34,7 +34,7 @@ export default class Grid extends React.Component {
                 <th scope="row">{rule.map((num, x) => {
                   return <div key={x}>{num}</div>;
                 })}</th>
-                {this.props.ruleSet.col.map((_, x) => { return (<td>o</td>); })}
+                {this.props.ruleSet.col.map((_, x) => { return (<td style={{ backgroundColor: (x+y)%2===0 ? "red" : "green" }}></td>); })}
               </tr>
             );
           })}

@@ -1,29 +1,35 @@
-/* I only use table because it's semantic */
-table, tbody, tfoot, thead, tr, th, td {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-  vertical-align: baseline;
+.main-grid {
   border-collapse: collapse;
+  font-size: 0;
+  font-family: serif;
+}
+
+.main-grid td,th {
+  padding: 0;
+  margin: 0;
+  font-weight: normal;
 }
 
 .main-grid thead th {
   vertical-align: bottom;
 }
 
-.main-grid tbody th {
-  text-align: right;
-}
-
 .main-grid th div {
   width: 16px;
   height: 16px;
-  border: 1px solid black;
+  font-size: initial;
+  /* border: 1px solid black; */
   line-height: 16px;
+  overflow: hidden;
+}
+
+.main-grid tbody th {
+  /* row rules cell */
+  text-align: right;
 }
 
 .main-grid tbody th div {
+  /* row rule numbers */
+  text-align: center;
   display: inline-block;
 }
