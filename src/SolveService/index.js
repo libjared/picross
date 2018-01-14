@@ -23,6 +23,12 @@ export default class SolveService {
     const length = opts.length;
     const rule = opts.rule;
 
+    // what we display as a "0" rule is really just an empty array, internally.
+    // let's treat it like a special case, and return early if we see it.
+    if (rule.length === 0) {
+      return [ "x".repeat(length) ];
+    }
+
     // number of unfilled spaces for this line
     const xes = this.countXesForLine(opts);
 
@@ -41,9 +47,17 @@ export default class SolveService {
       wiggleRoom,
       ruleLength: rule.length
     });
-    for (const chunkOffsets of chunkOffsetsPossibilities) {
-      console.log(chunkOffsets);
-    }
+
+    // now construct all the lines using the offset possibilities
+    const linePossibilities = chunkOffsetsPossibilities.map((cop) => {
+      const poss = this.generateLineFromOffsets({
+        length,
+        rule,
+        offsets: cop
+      });
+      return poss;
+    });
+    return linePossibilities;
   }
 
   countXesForLine(opts) {
@@ -97,6 +111,24 @@ export default class SolveService {
   }
 
   generateLineFromOffsets(opts) {
-    throw new Error("not impl");
+    // 2 2 2 [x11x22xx33] 1,0,1
+    const { length, rule, offsets } = opts;
+    let str = "";
+
+    // for each rule
+    for (let ruleIdx = 0; ruleIdx < rule.length; ruleIdx++) {
+      // add the offset Xes
+      const offsetHere = offsets[ruleIdx];
+      str += "x".repeat(offsetHere);
+
+      // add the rule numbers
+      const ruleHere = rule[ruleIdx];
+      str += (ruleIdx+1).toString().repeat(ruleHere);
+      str += "x";
+    }
+    const finalSpacesCount = Math.max(length - str.length, 0);
+    str += "x".repeat(finalSpacesCount);
+    str = str.slice(0, 10);
+    return str;
   }
 }
