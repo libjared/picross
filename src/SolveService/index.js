@@ -157,6 +157,19 @@ export default class SolveService {
     });
   }
 
+  andReduce(possibilities) {
+    const reduced = possibilities.reduce((prev, curr) => {
+      let resultingLine = "";
+      for (let i = 0; i < prev.length; i++) {
+        const a = prev[i];
+        const b = curr[i];
+        resultingLine += this.squareAnd(a, b);
+      }
+      return resultingLine;
+    });
+    return reduced;
+  }
+
   squareAnd(a, b) {
     // -+anything = -
     if (a === "-" || b === "-") return "-";
