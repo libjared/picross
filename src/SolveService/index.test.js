@@ -294,26 +294,14 @@ it("ANDs current-state-compatible possibilities A", () => {
 
 it("ANDs current-state-compatible possibilities with overlap fill", () => {
   const ss = new SolveService();
+
   // with rule 2, 3
   // --x#------ if the line looks like this
   // --x##----- we can prove this
-
-  const poss = ss.generatePossibilities({
-    length: 10,
-    rule: [ 2, 3 ]
-  });
-  const compat = ss.filterCompatible({
-    possibilities: poss,
-    truth: "--x#------"
-  });
-  expect(compat).toMatchObject([
+  const result = ss.andReduce([
     "11x222xxxx",
     "xxx11x222x",
     "xxx11xx222"
-    //   #       <-- a discovery is made: this square must be filled
   ]);
-
-  // that was the setup. now for the real test
-  const result = ss.andReduce(compat);
   expect(result).toBe("--x##-----");
 });
