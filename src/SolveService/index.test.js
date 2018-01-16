@@ -305,3 +305,30 @@ it("ANDs current-state-compatible possibilities with overlap fill", () => {
   ]);
   expect(result).toBe("--x##-----");
 });
+
+it("solves a line A", () => {
+  const ss = new SolveService();
+  const result = ss.solveLine({
+    length: 10,
+    rule: [ 4, 4 ],
+  });
+  expect(result).toBe("-111--222-");
+});
+
+it("solves a line B", () => {
+  const ss = new SolveService();
+  const result = ss.solveLine({
+    length: 6,
+    rule: [ 3, 2 ],
+  });
+  expect(result).toBe("111x22");
+});
+
+it("solves a line C", () => {
+  const ss = new SolveService();
+  const result = ss.solveLine({
+    currLine: "--x#------",
+    rule: [ 2, 3 ],
+  });
+  expect(result).toBe("--x##-----");
+});

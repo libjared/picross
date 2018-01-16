@@ -19,6 +19,31 @@
 // wiggle room: 2
 
 export default class SolveService {
+  solveLine(opts) {
+    // need to pass currLine or length, not both.
+    // since the latter can be derived from the former
+    const currLine = opts.currLine || "-".repeat(opts.length);
+    const length = currLine.length;
+    const { rule } = opts;
+
+    // we have to take all generated possibilities,
+    const allPossibilities = this.generatePossibilities({
+      length,
+      rule
+    });
+
+    // filter the ones that can't match the current state,
+    const compatiblePossibilities = this.filterCompatible({
+      truth: currLine,
+      possibilities: allPossibilities
+    });
+
+    // and then we crunch down the remaining possibilities using a logical-AND reduce.
+    const solved = this.andReduce(compatiblePossibilities);
+
+    return solved;
+  }
+
   generatePossibilities(opts) {
     const { length, rule } = opts;
 
