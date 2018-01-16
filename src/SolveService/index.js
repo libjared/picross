@@ -20,8 +20,7 @@
 
 export default class SolveService {
   generatePossibilities(opts) {
-    const length = opts.length;
-    const rule = opts.rule;
+    const { length, rule } = opts;
 
     // what we display as a "0" rule is really just an empty array, internally.
     // let's treat it like a special case, and return early if we see it.
