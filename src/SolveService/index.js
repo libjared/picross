@@ -128,7 +128,7 @@ export default class SolveService {
     }
     const finalSpacesCount = Math.max(length - str.length, 0);
     str += "x".repeat(finalSpacesCount);
-    str = str.slice(0, 10);
+    str = str.slice(0, length);
     return str;
   }
 }

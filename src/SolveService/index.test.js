@@ -114,6 +114,17 @@ it("generates line from offsets C", () => {
   expect(result).toBe("xx1xxxx2xx");
 });
 
+it("generates line from offsets non 10", () => {
+  // 2 3 [xx11xx222] 2,1
+  const ss = new SolveService();
+  const result = ss.generateLineFromOffsets({
+    length: 9,
+    rule: [ 2, 3 ],
+    offsets: [ 2, 1 ]
+  });
+  expect(result).toBe("xx11xx222");
+});
+
 it("generates possibilities 4,4", () => {
   const ss = new SolveService();
   const result = ss.generatePossibilities({
