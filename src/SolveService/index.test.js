@@ -175,3 +175,67 @@ it("generates possibilities 0", () => {
   expect(result).toHaveLength(1);
   expect(result[0]).toBe("xxxxxxxxxx");
 });
+
+it("filters compatible A", () => {
+  const ss = new SolveService();
+  const result = ss.filterCompatible({
+    possibilities: [
+      "1111x2222x",
+      "1111xx2222",
+      "x1111x2222"
+    ],
+    truth:
+      "-111x-222-"
+  });
+  expect(result).toHaveLength(2);
+  expect(result[0]).toBe("1111x2222x");
+  expect(result[1]).toBe("1111xx2222");
+});
+
+it("filters compatible B", () => {
+  const ss = new SolveService();
+  const result = ss.filterCompatible({
+    possibilities: [
+      "1111x2222x",
+      "1111xx2222",
+      "x1111x2222"
+    ],
+    truth:
+      "-111--2222"
+  });
+  expect(result).toHaveLength(2);
+  expect(result[0]).toBe("1111xx2222");
+  expect(result[1]).toBe("x1111x2222");
+});
+
+it("filters compatible C", () => {
+  const ss = new SolveService();
+  const result = ss.filterCompatible({
+    possibilities: [
+      "1111x2222x",
+      "1111xx2222",
+      "x1111x2222"
+    ],
+    truth:
+      "-111--222x"
+  });
+  expect(result).toHaveLength(1);
+  expect(result[0]).toBe("1111x2222x");
+});
+
+it("filters compatible D", () => {
+  const ss = new SolveService();
+  const result = ss.filterCompatible({
+    possibilities: [
+      "1111x2222x",
+      "1111xx2222",
+      "x1111x2222"
+    ],
+    truth:
+      "----------"
+  });
+  expect(result).toHaveLength(3);
+  expect(result[0]).toBe("1111x2222x");
+  expect(result[1]).toBe("1111xx2222");
+  expect(result[2]).toBe("x1111x2222");
+});

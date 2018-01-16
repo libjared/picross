@@ -131,4 +131,31 @@ export default class SolveService {
     str = str.slice(0, length);
     return str;
   }
+
+  filterCompatible(opts) {
+    const { truth, possibilities } = opts;
+
+    return possibilities.filter((poss) => {
+      // return true if poss is compatible with truth
+      // truth "-111x-222-"
+      // poss  "1111xx2222" should return true
+      // poss  "x1111x2222" should return false
+
+      for (var i = 0; i < poss.length; i++) {
+        const knownTruth = '123456789x'.indexOf(truth[i]) !== -1;
+        if (!knownTruth) {
+          // we can't say poss is incompatible with truth
+          // if we don't know what truth is, for this square.
+          continue;
+        }
+        // Xing when the truth says it's filled.
+        const mismatchA = poss[i] === "x" && '123456789'.indexOf(truth[i]) !== -1;
+        // filling when the truth says it's Xed.
+        const mismatchB = truth[i] === "x" && '123456789'.indexOf(poss[i]) !== -1;
+        if (mismatchA || mismatchB)
+          return false;
+      }
+      return true;
+    });
+  }
 }
