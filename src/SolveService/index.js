@@ -157,4 +157,15 @@ export default class SolveService {
       return true;
     });
   }
+
+  squareAnd(a, b) {
+    // -+anything = -
+    if (a === "-" || b === "-") return "-";
+    // anything+same = same
+    if (a === b) return a;
+    // after this point, anything+X = -
+    if (a === "x" || b === "x") return "-";
+    // after this point, it must be #
+    return "#";
+  }
 }

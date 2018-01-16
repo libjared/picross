@@ -239,3 +239,45 @@ it("filters compatible D", () => {
   expect(result[1]).toBe("1111xx2222");
   expect(result[2]).toBe("x1111x2222");
 });
+
+it("correctly performs logical-AND with squares", () => {
+  // truth table (well, not really)
+  // we're only testing up to 4 because it would take too long to write otherwise
+  /*
+      X-#1234
+      _______
+    X|x------
+    -|-------
+    #|--#####
+    1|--#1###
+    2|--##2##
+    3|--###3#
+    4|--####4
+  */
+
+  const ss = new SolveService();
+
+  const charset =
+  // 0123456
+    "x-#1234";
+  const truthTable = [
+    "0111111",
+    "1111111",
+    "1122222",
+    "1123222",
+    "1122422",
+    "1122252",
+    "1122226"
+  ];
+  for (let y = 0; y < 6; y++) {
+    for (let x = 0; x < 6; x++) {
+      const a = charset[x];
+      const b = charset[y];
+      const expected = charset[Number(truthTable[y][x])];
+      const result = ss.squareAnd(a, b);
+      if (result !== expected) {
+        throw new Error(`${a} + ${b} = ${result} (Expected ${expected})`);
+      }
+    }
+  }
+});
