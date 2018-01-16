@@ -185,7 +185,7 @@ it("filters compatible A", () => {
       "x1111x2222"
     ],
     truth:
-      "-111x-222-"
+      "-###x-###-"
   });
   expect(result).toHaveLength(2);
   expect(result[0]).toBe("1111x2222x");
@@ -201,7 +201,7 @@ it("filters compatible B", () => {
       "x1111x2222"
     ],
     truth:
-      "-111--2222"
+      "-###--####"
   });
   expect(result).toHaveLength(2);
   expect(result[0]).toBe("1111xx2222");
@@ -217,7 +217,7 @@ it("filters compatible C", () => {
       "x1111x2222"
     ],
     truth:
-      "-111--222x"
+      "-###--###x"
   });
   expect(result).toHaveLength(1);
   expect(result[0]).toBe("1111x2222x");
