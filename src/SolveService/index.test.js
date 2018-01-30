@@ -332,3 +332,12 @@ it("solves a line C", () => {
   });
   expect(result).toBe("--x##-----");
 });
+
+it("solves a line (long)", () => {
+  const ss = new SolveService();
+  const result = ss.solveLine({
+    length: 15,
+    rule: Array(5).fill(1),
+  });
+  expect(result).toBe("-".repeat(15));
+});
