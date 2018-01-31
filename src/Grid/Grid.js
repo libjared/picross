@@ -15,7 +15,7 @@ export default class Grid extends React.Component {
 
   render() {
     return (
-      <table className="main-grid" cellspacing="0">
+      <table className="main-grid" cellSpacing="0">
         <thead>
           <tr>
             <th></th>
@@ -29,7 +29,7 @@ export default class Grid extends React.Component {
         <tbody>
           {this.props.ruleSet.row.map((rule, y) =>
             // each has one header cell for the row rules
-              <tr key={y}>
+            <tr key={y}>
               <th scope="row">{rule.map((num, x) =>
                 <div key={x}>{num}</div>
               )}</th>
