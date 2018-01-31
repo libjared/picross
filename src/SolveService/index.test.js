@@ -341,3 +341,21 @@ it("solves a line (long)", () => {
   });
   expect(result).toBe("-".repeat(15));
 });
+
+it("can't solve because of impossible state", () => {
+  const ss = new SolveService();
+  const result = ss.solveLine({
+    currLine: "#x--------",
+    rule: [ 2, 2 ]
+  });
+  expect(result).toBe(null);
+});
+
+it("can't solve because of impossible rule", () => {
+  const ss = new SolveService();
+  const result = ss.solveLine({
+    length: 10,
+    rule: [ 11 ]
+  });
+  expect(result).toBe(null);
+});

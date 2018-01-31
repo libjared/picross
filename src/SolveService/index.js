@@ -10,6 +10,7 @@
 // 2 2 2 [x11xx22x33] 1,1,0
 // 2 2 2 [xx11x22x33] 2,0,0
 // wiggle room: 2
+// soln  [----------]
 
 // example 2
 // rule possibility offsets
@@ -17,6 +18,7 @@
 // 4 4 [1111xx2222] 0,1
 // 4 4 [x1111x2222] 1,0
 // wiggle room: 2
+// soln[-111--222-]
 
 export default class SolveService {
   solveLine(opts) {
@@ -37,6 +39,11 @@ export default class SolveService {
       truth: currLine,
       possibilities: allPossibilities
     });
+
+    if (compatiblePossibilities.length === 0) {
+      // the current state of the line makes this line unsolvable.
+      return null;
+    }
 
     // and then we crunch down the remaining possibilities using a logical-AND reduce.
     const solved = this.andReduce(compatiblePossibilities);
