@@ -19,25 +19,22 @@ export default class Grid extends React.Component {
         <thead>
           <tr>
             <th></th>
-            {this.props.ruleSet.col.map((rule, x) => {
-              return <th scope="col" key={x}>{rule.map((num, y) => {
-                return <div key={y}>{num}</div>;
-              })}</th>;
-            })}
+            {this.props.ruleSet.col.map((rule, x) =>
+              <th scope="col" key={x}>{rule.map((num, y) =>
+                <div key={y}>{num}</div>
+              )}</th>
+            )}
           </tr>
         </thead>
         <tbody>
-          {/* each has one header cell for the row rules */}
-          {this.props.ruleSet.row.map((rule, y) => {
-            return (
+          {this.props.ruleSet.row.map((rule, y) =>
+            // each has one header cell for the row rules
               <tr key={y}>
-                <th scope="row">{rule.map((num, x) => {
-                  return <div key={x}>{num}</div>;
-                })}</th>
-                {this.props.ruleSet.col.map((_, x) => { return (<td style={{ backgroundColor: (x+y)%2===0 ? "red" : "green" }}></td>); })}
-              </tr>
-            );
-          })}
+              <th scope="row">{rule.map((num, x) =>
+                <div key={x}>{num}</div>
+              )}</th>
+              {this.props.ruleSet.col.map((_, x) => <td key={x} style={{ backgroundColor: (x+y)%2===0 ? "red" : "green" }}></td> )}
+            </tr>)}
         </tbody>
       </table>
     );
